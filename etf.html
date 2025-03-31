@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>etf.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="intro-guide-to-index-investing">Intro Guide to Index Investing</h1>
+<p>This guide aims to demystify index investing for beginners without overwhelming you with complex financial jargon. Whether you're just starting your investment journey or looking to understand the fundamentals of index investing, you'll find straightforward explanations, practical advice, and visual representations that illustrate the power of consistent, long-term investing. By focusing on major market indexes, simple investment strategies, and the remarkable effects of compound growth, this guide will help you build confidence to take those first steps toward financial growth. Each section includes a &quot;TL;DR&quot; summary, making it easy to grasp key concepts quickly while providing enough depth for those who want to learn more.</p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#intro-guide-to-index-investing">Intro Guide to Index Investing</a></li>
+<li><a href="#table-of-contents">Table of Contents</a>
+<ul>
+<li><a href="#what-are-and-why-should-i-care-about-indexes">What are and why should I care about indexes?</a></li>
+<li><a href="#the-major-market-indexes">The Major Market Indexes</a>
+<ul>
+<li><a href="#united-states">United States:</a></li>
+<li><a href="#europe">Europe:</a></li>
+<li><a href="#tldr"><strong>TL;DR</strong></a></li>
+</ul>
+</li>
+<li><a href="#how-to-invest-in-market-indexes">How to Invest in Market Indexes</a>
+<ul>
+<li><a href="#tldr-1"><strong>TL;DR</strong></a></li>
+</ul>
+</li>
+<li><a href="#why-bother---the-power-of-regular-investing">Why Bother? - The Power of Regular Investing</a>
+<ul>
+<li><a href="#tldr-2"><strong>TL;DR</strong></a></li>
+</ul>
+</li>
+<li><a href="#understanding-dividend-stocks--reinvestment">Understanding Dividend Stocks &amp; Reinvestment</a>
+<ul>
+<li><a href="#tldr-3"><strong>TL;DR</strong></a></li>
+</ul>
+</li>
+<li><a href="#about-leveraging--margin-calls">About Leveraging &amp; Margin Calls</a>
+<ul>
+<li><a href="#tldr-4"><strong>TL;DR</strong></a></li>
+</ul>
+</li>
+<li><a href="#the-importance-of-diversification">The Importance of Diversification</a>
+<ul>
+<li><a href="#tldr-5"><strong>TL;DR</strong></a></li>
+</ul>
+</li>
+<li><a href="#common-investing-mistakes-beginners-should-avoid">Common Investing Mistakes Beginners Should Avoid</a>
+<ul>
+<li><a href="#tldr-6"><strong>TL;DR</strong></a></li>
+</ul>
+</li>
+<li><a href="#investment-growth-in-pictures">Investment Growth In Pictures</a>
+<ul>
+<li><a href="#growth-over-time">Growth Over Time</a></li>
+<li><a href="#investment-growth-comparison-after-30-years">Investment Growth Comparison After 30 Years</a></li>
+<li><a href="#growth-over-time---different-initial-principle">Growth Over Time - different initial principle</a></li>
+<li><a href="#investment-comparison-after-30-years">Investment Comparison After 30 Years</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="what-are-and-why-should-i-care-about-indexes">What are and why should I care about indexes?</h2>
+<p><strong>What is an Index?</strong></p>
+<p>A market index is a collection of stocks or other securities that represents a specific segment of the financial market, designed to track its overall performance and serve as a benchmark for investors.</p>
+<p><strong>Are Market Index respected?</strong></p>
+<p>Market indexes are widely respected and trusted by investors, financial professionals, and economists as reliable indicators of market performance due to their transparent methodologies, long-established track records, and independence from individual investment biases.</p>
+<h2 id="the-major-market-indexes">The Major Market Indexes</h2>
+<h3 id="united-states">United States:</h3>
+<ul>
+<li>
+<p><strong>S&amp;P 500 (SPX)</strong></p>
+<ul>
+<li>Companies are selected by a committee based on market cap (must exceed $14.5 billion), profitability, and liquidity</li>
+<li>Changes occur as needed, not on a fixed schedule, ensuring the index represents leading US companies</li>
+<li>Reference: <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/">https://www.spglobal.com/spdji/en/indices/equity/sp-500/</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Dow Jones Industrial Average (DJI)</strong></p>
+<ul>
+<li>Companies selected by editors of The Wall Street Journal based on reputation, growth, and investor interest</li>
+<li>No specific rules for inclusion/exclusion, focused on maintaining representation of the US economy</li>
+<li>Reference: <a href="https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/">https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/</a></li>
+</ul>
+</li>
+<li>
+<p><strong>NASDAQ Composite (IXIC)</strong></p>
+<ul>
+<li>Automatically includes all companies listed on the NASDAQ exchange</li>
+<li>Companies are added/removed simply based on their NASDAQ listing status</li>
+<li>Reference: <a href="https://www.nasdaq.com/market-activity/index/comp">https://www.nasdaq.com/market-activity/index/comp</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Russell 2000 (RUT)</strong></p>
+<ul>
+<li>Rebalanced annually every June</li>
+<li>Automatically includes the smallest 2000 companies from the Russell 3000 index</li>
+<li>Reference: <a href="https://www.ftserussell.com/products/indices/russell-us">https://www.ftserussell.com/products/indices/russell-us</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="europe">Europe:</h3>
+<ul>
+<li>
+<p><strong>FTSE 100 (UKX)</strong></p>
+<ul>
+<li>Companies are ranked by market capitalization every quarter</li>
+<li>Automatic entry for companies reaching 90th place or above, company is bumped/exit if falling below 111th place</li>
+<li>Reference: <a href="https://www.ftserussell.com/products/indices/uk">https://www.ftserussell.com/products/indices/</a></li>
+</ul>
+</li>
+<li>
+<p><strong>EURO STOXX 50 (SX5E)</strong></p>
+<ul>
+<li>Reviewed annually in September</li>
+<li>Selection based on free-float market cap of eligible companies from 8 Eurozone countries</li>
+<li>Reference: <a href="https://www.stoxx.com/index-details?symbol=SX5E">https://www.stoxx.com/index-details?symbol=SX5E</a></li>
+</ul>
+</li>
+<li>
+<p><strong>DAX (GDAXI)</strong></p>
+<ul>
+<li>Reviewed quarterly</li>
+<li>Companies must be listed on Frankfurt Exchange with sufficient free float and exchange volume</li>
+<li>Reference: <a href="https://www.dax-indices.com/index-details?isin=DE0008469008">https://www.dax-indices.com/index-details?isin=DE0008469008</a></li>
+</ul>
+</li>
+<li>
+<p><strong>CAC 40 (FCHI)</strong></p>
+<ul>
+<li>Reviewed quarterly by an independent committee</li>
+<li>Selection based on market cap and trading volume, ensuring representation of key sectors</li>
+<li>Reference: <a href="https://www.euronext.com/en/products/indices/FR0003500008-XPAR">https://www.euronext.com/en/products/indices/FR0003500008-XPAR</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="tldr"><strong>TL;DR</strong></h3>
+<p>Major indexes like S&amp;P 500 and FTSE 100 track the biggest companies in their markets. They're maintained by committees that add/remove companies based on size and performance, making them stable benchmarks for investors.</p>
+<h2 id="how-to-invest-in-market-indexes">How to Invest in Market Indexes</h2>
+<p>You don't buy indexes directly—instead, you invest in them through financial products designed to mirror their performance. The simplest way is through Exchange-Traded Funds (ETFs) or Index Funds. These are available through most investment platforms, including apps like Robinhood, Schwab, Revolut, as well as traditional brokerages and banks.</p>
+<p>To get started, you'll need to open an investment account, deposit money, and search for the ETF ticker symbol (like &quot;SPY&quot; for S&amp;P 500 or &quot;ISF&quot; for FTSE 100).</p>
+<p>You can buy as little as one share, or even fractional shares on many platforms. Index funds work similarly but are purchased at the end of the trading day. Both options typically have very low fees compared to actively managed investments, making them ideal for beginners who want broad market exposure without needing to pick individual stocks yourself.</p>
+<h3 id="tldr"><strong>TL;DR</strong></h3>
+<p>You don't buy indexes directly. Instead, use apps like Robinhood etc to purchase ETFs (like SPY for S&amp;P 500) that track these indexes. You can start with just one share or even less.</p>
+<br>
+<hr>
+<hr>
+<br>
+<h2 id="why-bother---the-power-of-regular-investing">Why Bother? - The Power of Regular Investing</h2>
+<p>Investing <strong>1,000</strong> Euro each month can build substantial wealth over time through the power of compound returns. Here's how your investment could grow, assuming an average annual return of 7% (a reasonable long-term average for diversified index investments btw):</p>
+<p><strong>After 10 years:</strong></p>
+<ul>
+<li>Total amount invested: 120,000 Euro (1,000 × 12 × 10)</li>
+<li>Approximate value: 173,000 Euro</li>
+<li>Growth beyond the initial contributions: 53,000 Euro</li>
+</ul>
+<p><strong>After 20 years:</strong></p>
+<ul>
+<li>Total amount invested: 240,000 Euro (1,000 × 12 × 20)</li>
+<li>Approximate value: 492,000 Euro</li>
+<li>Growth beyond the initial contributions: 252,000 Euro</li>
+</ul>
+<p><strong>After 30 years:</strong></p>
+<ul>
+<li>Total amount invested: 360,000 Euro (1,000 × 12 × 30)</li>
+<li>Approximate value: 1,197,000 Euro</li>
+<li>Growth beyond the contributions: 837,000 Euro</li>
+</ul>
+<p>This demonstrates how <strong>time</strong> becomes your most powerful investment tool. While you've only invested 360,000 Euro over 30 years, your money has worked for you to generate an additional 837,000 Euro in returns. This example illustrates why starting early and investing consistently, even with modest amounts, can lead to significant wealth accumulation over time.</p>
+<p>Note: These figures are simplified projections. Actual returns will vary year to year, and past performance doesn't guarantee future results. Just like every ad on the telly says.</p>
+<h3 id="tldr"><strong>TL;DR</strong></h3>
+<p>Investing <strong>1,000</strong> Euro monthly could grow to <strong>173,000€</strong> after 10 years, <strong>492,000€</strong> after 20 years, and nearly <strong>1.2 million Euro</strong> after 30 years (assuming 7% returns). <strong>Time is your biggest advantage</strong></p>
+<h2 id="understanding-dividend-stocks--reinvestment">Understanding Dividend Stocks &amp; Reinvestment</h2>
+<p>Some stocks/shares pay you a portion of their profits regularly these payments are called dividends. Think of it as getting a small &quot;thank you&quot; payment several times a year just for owning shares in a company.</p>
+<p>Many established companies in indexes like the S&amp;P 500 or FTSE 100 pay dividends, typically ranging from 1% to 5% of your investment annually. Companies that pay dividendws are more common on some stock exchanges than others. FTSE ok, NASDAQ not so much etc.</p>
+<p><strong>Why Dividends Matter:</strong></p>
+<p>When you own dividend stocks (shares in a company that pay a dividend), you have two ways to grow your money: the stock price can increase (capital appreciation) AND you receive regular dividend payments (income).</p>
+<p><strong>Reinvesting Dividends: The Growth Accelerator</strong></p>
+<p>Instead of taking these dividend payments as cash, you can choose to automatically buy more shares with that money. This is called &quot;dividend reinvestment.&quot;</p>
+<p>This is a powerful strategy because:</p>
+<ul>
+<li>Increases your share count without requiring additional money from your pocket</li>
+<li>Creates a snowball effect as your growing number of shares generates even more dividends</li>
+<li>Has historically accounted for a significant portion of total stock market returns</li>
+</ul>
+<p><strong>Is knowing about dividends relevant for beginners?</strong></p>
+<p>Absolutely! Many index ETFs (Exchange Trading Funds) offer versions that automatically reinvest dividends. For someone investing <strong>1,000 Euro</strong> monthly in your example, reinvesting dividends could add approximately 15-20% more to your final amount over 30 years compared to taking the dividends as cash money.</p>
+<p>This approach combines the stability of regular income with thosee longer term benefits of compounding. So making it particularly valuable for younger/earlier investors with time on their side. You.</p>
+<h3 id="tldr"><strong>TL;DR</strong></h3>
+<p>Some shares/stocks pay you regular cash (dividends). Reinvesting these payments to buy more shares creates a snowball effect that could add 15-20% more to your returns over time without any extra money from your pocket.</p>
+<h2 id="about-leveraging--margin-calls">About Leveraging &amp; Margin Calls</h2>
+<p>Leveraging means borrowing money to invest more than you actually have, like putting down 25% and borrowing the rest. This can amplify your gains when markets rise (investing 1,000 to control 4,000 in stocks means a 10% market gain creates a 40% return on your money). However, losses are equally magnified, and if your investments drop significantly, you'll face a &quot;margin call&quot; - a demand to deposit more money immediately or have your shares (known as positions) sold automatically, often at the worst possible time.</p>
+<p>Leveraging works best with a risk-averse, diversified portfolio that can withstand market volatility without triggering these forced sales via a margin call. The end of a stock market bubble begins with a slew of margin calls that just amplify.</p>
+<p>For beginners, it's generally wiser to avoid leverage until you've built experience, substantial savings, and a solid understanding of market cycles - because the market, just like real estate and history just keeps repeating itself. Cycling.</p>
+<p>If you do explore leveraging later, start with small amounts and never leverage money you cannot afford to lose because it can be very tempting when everything looks rosy.</p>
+<h3 id="tldr"><strong>TL;DR</strong></h3>
+<p>Leveraging multiplies both potential gains and losses by borrowing to invest more. Margin calls force you to add money when investments fall. Only consider this advanced strategy with a stable, diversified portfolio and money you can afford to lose.</p>
+<h2 id="the-importance-of-diversification">The Importance of Diversification</h2>
+<p>Diversification means spreading your investments across different assets rather than putting all your money in one place. Think of it as not carrying all your eggs in one basket. When you diversify, you invest across various companies, sectors, regions, and sometimes different types of assets (shares, bonds, fineart, gold, real estate...)</p>
+<p>This strategy helps protect your money because when some investments perform poorly, others may do well, smoothing out your overall returns. Index funds are naturally diversified. That S&amp;P 500 ETF instantly gives you ownership in 500 different companies across all major industries. Very risk adverse.</p>
+<p>For beginners, achieving good diversification is as simple as investing in a few broad-based index funds covering different regions (like US, Europe, and emerging markets) rather than trying to pick individual winners.</p>
+<h3 id="tldr"><strong>TL;DR</strong></h3>
+<p>Spread your investments across many companies and regions instead of betting on just a few. Index funds automatically give you this diversification, reducing your risk without reducing potential returns.</p>
+<h2 id="common-investing-mistakes-beginners-should-avoid">Common Investing Mistakes Beginners Should Avoid</h2>
+<ol>
+<li>
+<p><strong>Trying to time the market:</strong> Attempting to buy at the &quot;perfect&quot; low point or sell at the peak rarely works. Consistent investing regardless of market conditions (called outlay-cost averaging) typically outperforms timing attempts long term.</p>
+</li>
+<li>
+<p><strong>Checking investments too frequently:</strong> Daily price movements cause unnecessary anxiety and can trigger emotional decisions. For long-term investing, checking monthly or quarterly is more than enough.</p>
+</li>
+<li>
+<p><strong>Chasing past performance:</strong> Last year's winning investments often underperform in following years. Focus on your long-term strategy rather than jumping between hot of the day investments.</p>
+</li>
+<li>
+<p><strong>Paying high fees:</strong> Even small differences in fees (0.1% vs 1%) can reduce your overall wealth by thousands over the decades. Always consider fees/costs, expense ratios before picking where to buy thru for the investing.</p>
+</li>
+<li>
+<p><strong>Selling during market downturns:</strong> Market drops are normal and temporary. Selling during these periods locks in those losses rather than holding your nerve and giving investments time to recover.</p>
+</li>
+</ol>
+<h3 id="tldr"><strong>TL;DR</strong></h3>
+<p>Avoid these common mistakes: trying to time the market, checking investments daily, chasing trends, paying high fees, and panic-selling during downturns. Stick to your plan and think long-term.</p>
+<br>
+<h2 id="investment-growth-in-pictures">Investment Growth In Pictures</h2>
+<h3 id="growth-over-time">Growth Over Time</h3>
+<p><img src="growthovertime_1024.webp" alt="Growth over time" title="Growth over time"></p>
+<h3 id="investment-growth-comparison-after-30-years">Investment Growth Comparison After 30 Years</h3>
+<p><img src="investmentgrowthcomparison_1024.webp" alt="Growth comparison" title="Growth comparison"></p>
+<br>
+<h3 id="growth-over-time---different-initial-principle">Growth Over Time - different initial principle</h3>
+<p><img src="investmentmultiprincipal_1024.webp" alt="Different Principal" title="Different Principal"></p>
+<h3 id="investment-comparison-after-30-years">Investment Comparison After 30 Years</h3>
+<p><img src="comparisonafter30years_1024.webp" alt="30 Year Comparison" title="30 year comparison"></p>
+
+</body>
+</html>
